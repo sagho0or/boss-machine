@@ -25,7 +25,7 @@ export const cancelMeetings = () => {
 }
 
 export const createMeetingThunk = () => dispatch => {
-  axios.post('http://localhost:4001/api/meetings')
+  axios.post(`${process.env.API_BASE_URL}/api/meetings`)
   .then(res => res.data)
   .then(createdMeeting => {
     dispatch(createMeeting(createdMeeting));
@@ -34,7 +34,7 @@ export const createMeetingThunk = () => dispatch => {
 }
 
 export const cancelMeetingsThunk = () => dispatch => {
-  axios.delete('http://localhost:4001/api/meetings')
+  axios.delete(`${process.env.API_BASE_URL}/api/meetings`)
   .then(() => {
     dispatch(cancelMeetings());
   })
