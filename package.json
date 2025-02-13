@@ -7,7 +7,8 @@
     "test": "cross-env PORT=8000 mocha --watch",
     "start-backend": "nodemon server.js --watch server/",
     "start-frontend": "cross-env NODE_ENV=development webpack-dev-server --mode development",
-    "build": "webpack-cli --mode production",
+    "build": "cross-env NODE_ENV=production webpack --mode production",
+    "serve": "npm run build && nodemon server.js",
     "postinstall": "webpack"
   },
   "author": "Codecademy",
