@@ -20,11 +20,22 @@ module.exports = app;
 
 // Add middleware for handling CORS requests from index.html
 const cors = require('cors');
+
+const allowedOrigins = ['https://boss-machine-front.onrender.com', 'http://localhost:3000'];
 app.use(cors({
-  origin: 'http://localhost:3000',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true 
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true,
 }));
+
+
+
 // Add middware for parsing request bodies here:
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
